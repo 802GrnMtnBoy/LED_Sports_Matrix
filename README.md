@@ -8,7 +8,7 @@ I will be adding to the ReadMe file as time allows me
 
 # Required Tools / Hardware
   1. Raspberry Pi - I used a [Raspberry Pi Zero WH](https://www.amazon.com/Raspberry-Pi-Zero-WH-pre-soldered/dp/B07NY4WN6W/ref=asc_df_B07NY4WN6W/?tag=bingshoppinga-20&linkCode=df0&hvadid=&hvpos=&hvnetw=o&hvrand=&hvpone=&hvptwo=&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=&hvtargid=pla-4584413746391131&psc=1&tag=&ref=&adgrpid=1293026030762014&hvadid=80814214584818&hvnetw=o&hvqmt=e&hvbmt=be&hvdev=c&hvlocint=&hvlocphy=&hvtargid=pla-4584413746391131&hydadcr=) for this project
-  2. Adafruit Hat 
+  2. [Adafruit RGB Martix Bonnet/Hat](https://www.adafruit.com/product/3211)
 
 # Python Prerequisites
 
