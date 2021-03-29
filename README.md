@@ -4,7 +4,7 @@ I am in no way a professional at coding in Python (still learning) and am well a
 # LED Sports Matrix
 A python project using a Raspberry Pi Zero with an Adafruit Hat to power a 32x64 LED Matrix with various sport data and weather information!
 
-[I will be updating the ReadMe file as time allows me]
+**I will be updating the ReadMe file as time allows**
 
 This project was born from the efforts of the following separate projects.
   1.  [nhl-led-scoreboard](https://github.com/riffnshred/nhl-led-scoreboard)
