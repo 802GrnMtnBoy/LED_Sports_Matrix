@@ -6,10 +6,10 @@ A python project using a Raspberry Pi Zero with an Adafruit Hat to power a 32x64
 
 I will be adding to the ReadMe file as time allows me
 
-# Required Tools / Hardware
+# Tools / Hardware
   1. Raspberry Pi - I used a [Raspberry Pi Zero WH](https://www.adafruit.com/product/3708) for this project
   2. [Adafruit RGB Martix Bonnet/Hat](https://www.adafruit.com/product/3211)
-  3. [LED Matrix Module](https://www.amazon.com/gp/product/B07SDMWX9R/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1) (32x64)
+  3. [LED Matrix Module](https://www.amazon.com/gp/product/B07SDMWX9R/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1) (32x64 pixels)
   4. [5V 4A (4000mA) switching power supply](https://www.adafruit.com/product/1466)
   5. [GPIO Ribbon Cable 2x8 IDC Cable](https://www.adafruit.com/product/4170)
 
