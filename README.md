@@ -6,7 +6,7 @@ I am in no way a professional at coding in Python (still learning) and am well a
 
 I will be adding to the ReadMe file as time allows me
 
-#Example Outputs
+# Example Outputs
 ![GitHub Logo](/images/PXL_20210329_114302690.jpg)
 
 ![GitHub Logo](/images/PXL_20210329_114318769.jpg)
