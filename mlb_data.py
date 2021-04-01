@@ -60,15 +60,18 @@ def mlb_data_last_game(preferred_team):
 
         last_game_date = last_game_date.strftime('%m/%d/%Y')
         last_gameData = statsapi.schedule(date=last_game_date, start_date=None, end_date=None, team=team['id'], opponent="", sportId=1, game_id=None)
-        last_boxscore = statsapi.boxscore_data(last_gameData[0]['game_id'], timecode=None)
+        
+        if len(last_gameData) > 0:
+            last_boxscore = statsapi.boxscore_data(last_gameData[0]['game_id'], timecode=None)
 
-        game_data_set['home_id'] = last_gameData[0]['home_id']
-        game_data_set['away_id'] = last_gameData[0]['away_id']
-        game_data_set['status'] = last_gameData[0]['status']
-        game_data_set['home_score'] = last_gameData[0]['home_score']
-        game_data_set['home_hits'] = last_boxscore['home']['teamStats']['batting']['hits']
-        game_data_set['away_score'] = last_gameData[0]['away_score']
-        game_data_set['away_hits'] = last_boxscore['away']['teamStats']['batting']['hits']
+            game_data_set['home_id'] = last_gameData[0]['home_id']
+            game_data_set['away_id'] = last_gameData[0]['away_id']
+            game_data_set['status'] = last_gameData[0]['status']
+            game_data_set['home_score'] = last_gameData[0]['home_score']
+            game_data_set['home_hits'] = last_boxscore['home']['teamStats']['batting']['hits']
+            game_data_set['away_score'] = last_gameData[0]['away_score']
+            game_data_set['away_hits'] = last_boxscore['away']['teamStats']['batting']['hits']
+        
         break
 
     return game_data_set
@@ -86,23 +89,26 @@ def mlb_data_current(preferred_team):
         now = datetime.datetime.now().strftime('%m/%d/%Y')
         todays_gameData = statsapi.schedule(date=datetime.datetime.now().strftime('%m/%d/%Y'), start_date=None, end_date=None, team=team['id'], opponent="", sportId=1, game_id=None)
         #todays_boxscore = statsapi.boxscore_data(todays_gameData[0]['game_id'], timecode=None)
-        response = requests.get('https://statsapi.mlb.com/api/v1.1/game/'+ str(todays_gameData[0]['game_id']) +'/feed/live')
+        if len(todays_gameData) > 0:
+            response = requests.get('https://statsapi.mlb.com/api/v1.1/game/'+ str(todays_gameData[0]['game_id']) +'/feed/live')
+            mlb_game_json_data = response.json() if response and response.status_code == 200 else None
 
-        mlb_game_json_data = response.json() if response and response.status_code == 200 else None
+            game_data_set['home_id'] = todays_gameData[0]['home_id']
+            game_data_set['away_id'] = todays_gameData[0]['away_id']
+            game_data_set['status'] = todays_gameData[0]['status']
+            game_data_set['home_score'] = todays_gameData[0]['home_score']
+            #game_data_set['home_hits'] = todays_boxscore['home']['teamStats']['batting']['hits'] #use live game data
+            game_data_set['home_hits'] = mlb_game_json_data['liveData']['boxscore']['teams']['home']['teamStats']['batting']['hits']
+            game_data_set['away_score'] = todays_gameData[0]['away_score']
+            #game_data_set['away_hits'] = todays_boxscore['away']['teamStats']['batting']['hits'] #use live game data
+            game_data_set['away_hits'] = mlb_game_json_data['liveData']['boxscore']['teams']['away']['teamStats']['batting']['hits']
+            game_data_set['current_inning'] = todays_gameData[0]['current_inning']
+            game_data_set['inning_state'] = todays_gameData[0]['inning_state']
+            game_data_set['game_datetime'] = mlb_game_json_data['gameData']['datetime']['time'] + ' ' + mlb_game_json_data['gameData']['datetime']['ampm']
+            
+            if game_data_set['status'] != "Scheduled" or game_data_set['status'] != "Pre-Game":
+                game_data_set['outs_count'] = mlb_game_json_data['liveData']['linescore']['outs']
 
-        game_data_set['home_id'] = todays_gameData[0]['home_id']
-        game_data_set['away_id'] = todays_gameData[0]['away_id']
-        game_data_set['status'] = todays_gameData[0]['status']
-        game_data_set['home_score'] = todays_gameData[0]['home_score']
-        #game_data_set['home_hits'] = todays_boxscore['home']['teamStats']['batting']['hits'] #use live game data
-        game_data_set['home_hits'] = mlb_game_json_data['liveData']['boxscore']['teams']['home']['teamStats']['batting']['hits']
-        game_data_set['away_score'] = todays_gameData[0]['away_score']
-        #game_data_set['away_hits'] = todays_boxscore['away']['teamStats']['batting']['hits'] #use live game data
-        game_data_set['away_hits'] = mlb_game_json_data['liveData']['boxscore']['teams']['away']['teamStats']['batting']['hits']
-        game_data_set['current_inning'] = todays_gameData[0]['current_inning']
-        game_data_set['inning_state'] = todays_gameData[0]['inning_state']
-        game_data_set['game_datetime'] = mlb_game_json_data['gameData']['datetime']['time'] + ' ' + mlb_game_json_data['gameData']['datetime']['ampm']
-        game_data_set['outs_count'] = mlb_game_json_data['liveData']['linescore']['outs']
-        break
+            break
 
     return game_data_set

@@ -323,8 +323,8 @@ def run(matrix):
                         matrix.SetImage(displayLogo(currentBoard,mlb_game_data_set['home_id'],colout, 30, 30),37,icony-3)
                 else:
                     #No MLB Game Today
-                    graphics.DrawText(canvas, font_very_small, 35, 10, textColor, "No")
-                    graphics.DrawText(canvas, font_very_small, 38, 18, textColor, "Game")
+                    graphics.DrawText(canvas, font_very_small, 45, 10, textColor, "No")
+                    graphics.DrawText(canvas, font_very_small, 45, 18, textColor, "Game")
                     graphics.DrawText(canvas, font_very_small, 45, 25, textColor, "Today")
                     canvas = matrix.SwapOnVSync(canvas)
                     matrix.SetImage(displayLogo(currentBoard,options_list['mlb_team_id'],colout, iconsizx, iconsizy),3,icony+1)
